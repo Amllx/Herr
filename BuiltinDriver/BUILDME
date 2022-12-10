@@ -1,0 +1,7 @@
+<BUILDME>
+    <TIER2.LIB>
+        <INCLUDE="*.h">
+        <SRC="*.c">
+        <LINK_AS="SystemLibrary">
+    </TIER2.LIB>
+</BUILDME>

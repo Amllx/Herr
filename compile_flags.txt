@@ -1,0 +1,6 @@
+-ILibrary
+-std=c++17
+-std=c17
+-IKernel/Library
+-ISystem/Headers
+-IDrivers

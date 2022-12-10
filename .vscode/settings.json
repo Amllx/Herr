@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "*.htx": "html",
+        "*.S": "plaintext",
+        "index": "html",
+        "*.h": "cpp",
+        "*.hpp": "cpp",
+        "*.asm": "asm-intel-x86-generic",
+        "AdvancedPIC.C": "cpp"
+    }
+}
