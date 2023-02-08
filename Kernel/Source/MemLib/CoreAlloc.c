@@ -7,8 +7,8 @@
 static Boolean gAllocationEnabled = False;
 
 static SizeT	   gMemorySize = 0;
-static AllocBlock* gBaseAddress = NULL;
-static AllocBlock* gHighestAddress = NULL;
+static MemBlk* gBaseAddress = NULL;
+static MemBlk* gHighestAddress = NULL;
 
 Boolean 
 MemEnabled(void)
@@ -56,7 +56,7 @@ MemInit(BootloaderHeader* bootHeader)
 		}
 	}
 
-	gMemorySize = ( -((UIntPtr)&gBaseAddress - (UIntPtr)&gHighestAddress)) * sizeof(struct AllocBlock);
+	gMemorySize = ( -((UIntPtr)&gBaseAddress - (UIntPtr)&gHighestAddress)) * sizeof(struct MemBlk);
 
 	gHighestAddress->Prev = gBaseAddress;
     gHighestAddress->Next = gBaseAddress;
@@ -97,7 +97,7 @@ static struct AllocLock gAllocLock = {
 // Initializes an allocation list
 static 
 Void 
-MemInitAllocationList(AllocBlock* block) {
+MemInitAllocationList(MemBlk* block) {
 	Check(NotNull(block), "Block is NULL! (MemInitAllocationList)");
 
 	if (block->Index[0].Magic != MEM_MAGIC) {
@@ -117,7 +117,7 @@ MemInitAllocationList(AllocBlock* block) {
 
 static
 VoidPtr 
-MemReserveBlock(AllocBlock* block, SizeT index, SizeT Size) {
+MemReserveBlock(MemBlk* block, SizeT index, SizeT Size) {
 	if (gAllocLock.bLocked) return NULL;
 	if (block->Index[index].Size > (KIB * 4)) { block->Index[index].Used = True; Result = ERR_BAD_ACCESS; return NULL; }
 	if (((Size + 4096) & 16) == 16) Size += 16;
@@ -141,7 +141,7 @@ MemReserveBlock(AllocBlock* block, SizeT index, SizeT Size) {
 
 static
 VoidPtr 
-MemAllocBlock(AllocBlock* block, SizeT Size) {
+MemAllocBlock(MemBlk* block, SizeT Size) {
     Result = MEM_NOT_ENABLED;
     if (!gAllocationEnabled) return NULL;
 
@@ -175,8 +175,8 @@ MemAllocBlock(AllocBlock* block, SizeT Size) {
 }
 
 static
-AllocBlock*
- MemAllocNextBlock(AllocBlock* block) {
+MemBlk*
+ MemAllocNextBlock(MemBlk* block) {
     if (block == NULL) {
 		ConsoleLog("!!!!OUT OF MEMORY!!!!");
 
@@ -190,7 +190,7 @@ AllocBlock*
     } // Skip this block
 
     // Or if empty, fill this block
-    block->Next = block + sizeof(AllocBlock);
+    block->Next = block + sizeof(MemBlk);
     block->Next->Prev = block;
 
     block = block->Next;
@@ -201,7 +201,7 @@ AllocBlock*
 
 static
 Void 
-MemExpandBlock(AllocBlock* Current) {
+MemExpandBlock(MemBlk* Current) {
 	if ((Current = MemAllocNextBlock(Current)) == NULL) {
 		Int32 tmp = Result; // stock the Result
 
@@ -227,7 +227,7 @@ MemAlloc(SizeT Size) {
     if (Size < 1) return NULL;
 
 	VoidPtr allocatedBlock = NULL;
-	AllocBlock* currentBlock = gBaseAddress;
+	MemBlk* currentBlock = gBaseAddress;
 	MemInitAllocationList(currentBlock);
 
 	// seek and obtain strategy.
@@ -251,7 +251,7 @@ VoidPtr MemResize(VoidPtr Pointer, SizeT iSize) {
 	if (Pointer == NULL) return NULL;
 	if (iSize == 0) return NULL;
 
-	AllocBlock* currentBlock = gBaseAddress;
+	MemBlk* currentBlock = gBaseAddress;
 
 	while (currentBlock != NULL) {
 		for (SizeT index = 0; index < MEM_MAX_HEADERS; ++index) {
@@ -287,7 +287,7 @@ VoidPtr MemResize(VoidPtr Pointer, SizeT iSize) {
 
 static
 Int32 
-MemFreeBlock(AllocBlock* currentBlock, SizeT index, VoidPtr ptr) {
+MemFreeBlock(MemBlk* currentBlock, SizeT index, VoidPtr ptr) {
 	if (!currentBlock->Index[index].Used) return -1;
 	if (currentBlock->Index[index].VirtualAddress != ptr) return -1;
 
@@ -307,7 +307,7 @@ MemFree(VoidPtr Alloc) {
 	Result = ERR_NULL;
 	if (Alloc == NULL) return MEM_BAD_ARG;
 
-    AllocBlock* currentBlock = gBaseAddress;
+    MemBlk* currentBlock = gBaseAddress;
 
     while (currentBlock != NULL) {
         for (SizeT index = 0; index < MEM_MAX_HEADERS; ++index) {

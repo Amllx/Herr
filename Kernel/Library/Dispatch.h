@@ -3,13 +3,13 @@
 #include <System.h>
 #include <DT/Result.h>
 
-typedef struct DispatchHeader {
+typedef struct Dispatcher {
 	Int64 iNumSiblings;
 	Int64 iIdent;
 
 	void(*OnDispatch)();
 	void(*OnPostDispatch)();
-} DispatchHeader;
+} Dispatcher;
 
 Boolean 
-NewDispatch(struct DispatchHeader* Dispatcher, struct DispatchHeader** DispatchTbl, SizeT* iCounter, SizeT iMax);
+NewDispatcher(struct Dispatcher* Dispatcher, struct Dispatcher** DispatchTbl, SizeT* iCounter, SizeT iMax);

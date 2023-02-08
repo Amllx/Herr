@@ -76,12 +76,12 @@ static Char* ExceptionMessage[32] = {
 
 static StackFrame* gCurrentStack = NULL;
 
-static struct DispatchHeader* gDispatch[64];
+static struct Dispatcher* gDispatch[64];
 static SizeT gCounter = 0;
 
 StackFrame* CurrentStack(Void) { return gCurrentStack; }
 
-Boolean AddInterruptDispatch(DispatchHeader* Ctrl) { return NewDispatch(Ctrl, gDispatch, &gCounter, 64); }
+Boolean AddInterruptDispatch(Dispatcher* Ctrl) { return NewDispatcher(Ctrl, gDispatch, &gCounter, 64); }
 
 extern UIntPtr HandleInterrupts(UIntPtr rsp) {
 	Cli();

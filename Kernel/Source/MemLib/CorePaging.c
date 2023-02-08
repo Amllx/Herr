@@ -1,7 +1,3 @@
-/*
-	Denver Project.
-	Copyright Amlal El Mahrouss all rights reserved
-*/
 
 #include <GraphicsLib/Terminal.h>
 #include <MemLib/CorePaging.h>
@@ -49,7 +45,7 @@ VirtualCreateMemoryEx(VoidPtr vaddr, UInt32 flags)
 	if (!page) return NULL;
 
 	page->pEntries[0].bPresent = True;
-	page->pEntries[0].iPhysAddr = (((UIntPtr)vaddr << 12) + PAGE_FRAME_INDEX(vaddr)) >> 12;
+	page->pEntries[0].iPhysAddr = (UIntPtr)vaddr >> 12; 
 	page->pEntries[0].bReadWrite = ((flags & FLAG_RW) == FLAG_RW);
 	page->pEntries[0].bWt = ((flags & FLAG_WT) == FLAG_WT);
 	page->pEntries[0].bUser = ((flags & FLAG_USER) == FLAG_USER);

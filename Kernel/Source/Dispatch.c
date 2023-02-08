@@ -1,7 +1,7 @@
 #include <Dispatch.h>
 
 Boolean 
-NewDispatch(struct DispatchHeader* Dispatcher, struct DispatchHeader** DispatchTbl, SizeT* iCounter, SizeT iMax) {
+NewDispatcher(struct Dispatcher* Dispatcher, struct Dispatcher** DispatchTbl, SizeT* iCounter, SizeT iMax) {
 	Result = ERR_FAILURE;
 
 	if (Dispatcher == NULL) return False;

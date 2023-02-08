@@ -1,6 +1,6 @@
 #!/bin/zsh
-rm -rf DEPLOY/bin/
-mkdir DEPLOY/bin/
-cp DENVER64.LIB DEPLOY/bin/
 
-cp SystemRoot/limine.cfg DEPLOY/bin/
+rm -rf Deployment/bin/
+mkdir Deployment/bin/
+cp DENVER64.LIB Deployment/bin/
+cp SystemRoot/limine.cfg Deployment/bin/
