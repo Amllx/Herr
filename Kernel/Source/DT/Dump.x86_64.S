@@ -1,4 +1,4 @@
-; This is Amlal EL MAHROUSS Code, copyright Amlal EL MAHROUSS.
+; This is Amlal El Mahrouss's Code
 ; File: Dump.x86_64.S
 ; Purpose: Dumping utilities.
 

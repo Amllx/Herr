@@ -1,4 +1,4 @@
-// Copyright EL Mahrouss-Kajji, all rights reserved.
+// Copyright EL Mahrouss Amlal, all rights reserved.
 // Simple Key algorithm to use over more reliable algorithms.
 
 #include <Key16.h>
