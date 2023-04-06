@@ -1,0 +1,9 @@
+#!//bin/zsh
+
+wget "https://github.com/Amllx/tmp/raw/main/limine-cd-efi.bin" -O limine-cd-efi.bin
+wget "https://github.com/Amllx/tmp/raw/main/limine-cd.bin" -O limine-cd.bin
+wget "https://github.com/Amllx/tmp/raw/main/limine.sys" -O limine.sys
+
+mv limine.sys bin/
+mv limine-cd.bin bin/
+mv limine-cd-efi.bin bin/
