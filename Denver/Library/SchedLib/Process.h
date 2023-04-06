@@ -1,6 +1,5 @@
 #pragma once
 
-#include <Lib.h>
 #include <System.h>
 
 #define SCHED_PROCESS_NAME_LEN (256)
