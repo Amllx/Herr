@@ -1,5 +1,5 @@
 #include <ATAPI/ATAPI.h>
-#include <MemLib/CoreAlloc.h>
+#include <MemLib/Alloc.h>
 
 UInt8* ATAPIRead(UInt16 Bus, UInt8 Drive, UInt8 Lba) {
 	// The packet to base ourself of.

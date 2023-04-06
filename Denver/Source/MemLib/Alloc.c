@@ -1,8 +1,8 @@
 #include <GraphicsLib/Terminal.h>
-#include <MemLib/CoreAlloc.h>
+#include <MemLib/Alloc.h>
 #include <HILib/Intel/Page.h>
 #include <StringUtils.h>
-#include <DT/Result.h>
+#include <DTLib/Result.h>
 
 static Boolean gAllocationEnabled = False;
 static SizeT gMemorySize = 0;

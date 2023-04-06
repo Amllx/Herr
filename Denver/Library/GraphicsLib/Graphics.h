@@ -1,7 +1,7 @@
 #pragma once
 
 #include <System.h>
-#include <MemLib/CoreAlloc.h>
+#include <MemLib/Alloc.h>
 #include <Prekernel/EKBoot.h>
 #include <GraphicsLib/Terminal.h>
 

@@ -1,6 +1,6 @@
 #include <Defs.h>
 #include <StringUtils.h>
-#include <MemLib/CoreAlloc.h>
+#include <MemLib/Alloc.h>
 
 Int32 StringCompare(const Char* src, const Char* cmp, SizeT size) {
     Int32 counter = 0;

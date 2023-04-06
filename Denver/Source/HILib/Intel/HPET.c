@@ -1,8 +1,8 @@
 #include <GraphicsLib/Terminal.h>
 #include <HILib/Intel/HPET.h>
 #include <MemLib/CoreMMIO.h>
-#include <DT/Assert.h>
-#include <DT/Result.h>
+#include <DTLib/Assert.h>
+#include <DTLib/Result.h>
 
 #define CLOCK_HPET_GENERAL_CAPS_AND_ID 0x00
 #define CLOCK_HPET_GENERAL_CONFIG 0x10

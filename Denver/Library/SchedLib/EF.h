@@ -15,3 +15,5 @@ typedef struct EFContainer {
     SizeT SectionsSz;
     SizeT SectionsCount;
 } EFContainer;
+
+#define EF_MAGIC_PPC (0xBAF0)

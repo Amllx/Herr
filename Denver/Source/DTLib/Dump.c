@@ -1,6 +1,6 @@
 #include <StringUtils.h>
-#include <MemLib/CoreAlloc.h>
-#include <DT/Dump.h>
+#include <MemLib/Alloc.h>
+#include <DTLib/Dump.h>
 
 #define PAGE_ERR_OK             (0x0)
 #define PAGE_ERR_PRESENT        (0x1)

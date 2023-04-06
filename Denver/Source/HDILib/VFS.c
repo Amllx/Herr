@@ -1,6 +1,6 @@
 #include <HDILib/HDI.h>
 #include <HDILib/VFS.h>
-#include <DT/Result.h>
+#include <DTLib/Result.h>
 #include <GraphicsLib/Terminal.h>
 
 static Int32 HDIAttributeVirtualID(void);

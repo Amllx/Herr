@@ -12,7 +12,7 @@ extern "C" {
 #include <Bool.h>
 #include <Defs.h>
 #include <Number.h>
-#include <DT/Assert.h>
+#include <DTLib/Assert.h>
 
 extern struct BootStruct* gBootHdr;
 

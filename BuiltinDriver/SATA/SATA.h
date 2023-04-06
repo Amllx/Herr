@@ -1,7 +1,7 @@
 #pragma once
 
 #include <GraphicsLib/Terminal.h>
-#include <MemLib/CoreAlloc.h>
+#include <MemLib/Alloc.h>
 #include <HDILib/HDI.h>
 #include <IOLib/Pci.h>
 #include <System.h>

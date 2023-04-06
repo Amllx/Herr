@@ -5,7 +5,7 @@ CROSS_CC = x86_64-elf-gcc
 ROOTLIB = Denver
 LD_FLAGS = --script=$(LD_SCRIPT) -nostdlib -static 	-zmax-page-size=0x1000
 
-SOURCES = $(wildcard $(ROOTDIR)/Source/*.c) $(wildcard $(ROOTDIR)/Source/Prekernel/*.c) $(wildcard $(ROOTDIR)/Source/DT/*.c) $(wildcard $(ROOTDIR)/Source/GraphicsLib/*.c) $(wildcard $(ROOTDIR)/Source/ELFLib/*.c)\
+SOURCES = $(wildcard $(ROOTDIR)/Source/*.c) $(wildcard $(ROOTDIR)/Source/Prekernel/*.c) $(wildcard $(ROOTDIR)/Source/DTLib/*.c) $(wildcard $(ROOTDIR)/Source/GraphicsLib/*.c) $(wildcard $(ROOTDIR)/Source/ELFLib/*.c)\
 					$(wildcard $(ROOTDIR)/Source/HDILib/*.c) $(wildcard $(ROOTDIR)/Source/HILib/Intel/*.c) $(wildcard $(ROOTDIR)/Source/HILib/*.c) $(wildcard $(ROOTDIR)/Source/IOLib/*.c) $(wildcard $(ROOTDIR)/Source/MemLib/*.c)\
 					$(wildcard $(ROOTDIR)/AHCI/*.c) $(wildcard $(ROOTDIR)/ATA/*.c) $(wildcard $(ROOTDIR)/UHCI/*.c) $(wildcard $(ROOTDIR)/ATAPI/*.c) $(wildcard $(ROOTDIR)/SATA/*.c) $(wildcard $(ROOTDIR)/Ethernet/*.c)\
 					$(wildcard $(ROOTDIR)/Source/DevLib/*.c) $(wildcard $(ROOTDIR)/Source/SchedLib/*.c)

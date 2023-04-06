@@ -1,5 +1,5 @@
 #include <GraphicsLib/Graphics.h>
-#include <DT/Result.h>
+#include <DTLib/Result.h>
 
 static Boolean GraphicsWriteRect(struct GLDeviceContext* ctx, Int32 _x, Int32 _y, UInt8 red, UInt8 green, UInt8 blue);
 static Boolean GraphicsWritePixelAt(struct GLDeviceContext* ctx, Int32 x, Int32 y, UInt8 red, UInt8 green, UInt8 blue);

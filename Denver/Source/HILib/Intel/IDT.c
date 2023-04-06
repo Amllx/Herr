@@ -1,7 +1,7 @@
 #include <HILib/Intel/InterruptService.h>
 #include <GraphicsLib/Graphics.h>
 #include <HILib/Intel/Intel.h>
-#include <DT/Dump.h>
+#include <DTLib/Dump.h>
 
 static IDT* Idt = NULL;
 static IDTReg* IdtReg = NULL;

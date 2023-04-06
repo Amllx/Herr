@@ -9,7 +9,7 @@
 #include <Endian.h>
 #include <StringUtils.h>
 #include <HILib/Intel/Cpu.h>
-#include <MemLib/CoreAlloc.h>
+#include <MemLib/Alloc.h>
 #include <Prekernel/EKBoot.h>
 #include <MemLib/CorePaging.h>
-#include <DT/Assert.h>
+#include <DTLib/Assert.h>

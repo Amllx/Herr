@@ -1,7 +1,7 @@
 #include <GraphicsLib/Terminal.h>
-#include <DT/Result.h>
+#include <DTLib/Result.h>
 #include <HILib/Intel/HPET.h>
-#include <MemLib/CoreAlloc.h>
+#include <MemLib/Alloc.h>
 #include <HDILib/HDI.h>
 #include <AHCI/AHCI.h>
 

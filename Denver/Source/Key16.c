@@ -3,7 +3,7 @@
 
 #include <Key16.h>
 #include <StringUtils.h>
-#include <MemLib/CoreAlloc.h>
+#include <MemLib/Alloc.h>
 #include <GraphicsLib/Terminal.h>
 
 #define ADD_LETTER(LOW, HIGH) {LOW, HIGH}
