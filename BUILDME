@@ -1,0 +1,12 @@
+# !/bin/zsh
+
+export ROOTDIR=Denver
+export BUILDOPT="-IDenver/Library -IBuiltinDriver -IBuiltinDriver/AHCI -IBuiltinDriver/ATA -IBuiltinDriver/SATA -IBuiltinDriver/UHCI -IBuiltinDriver/Ethernet -IBuiltinDriver/ATAPI"
+make -f KernelBuilder.mk kernbuild
+
+export ROOTDIR=BuiltinDriver
+export BUILDOPT="-IDenver/Library -IBuiltinDriver -IBuiltinDriver/AHCI -IBuiltinDriver/ATA -IBuiltinDriver/SATA -IBuiltinDriver/UHCI -IBuiltinDriver/Ethernet -IBuiltinDriver/ATAPI -IDenver/Library"
+make -f KernelBuilder.mk kernbuild
+
+export KERNEL_ID="Kernel"
+make -f KernelBuilder.mk kernlink
