@@ -1,3 +1,3 @@
 #include <DTLib/Result.h>
 
-DTSTATUS Result = 0UL;
+OSErr Result = 0UL;

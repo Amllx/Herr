@@ -5,8 +5,8 @@
 #include <HDILib/HDI.h>
 #include <AHCI/AHCI.h>
 
-static HDIVolume gMainBootVolume;
-static Boolean gHDIEnabled = False;
+static HDIVolume kMainVolume;
+static Boolean kEnabled = False;
 
 #define HDI_STAT_BUSY       (0x80)
 #define HDI_STAT_READY      (0x40)
@@ -32,16 +32,16 @@ PIOWaitReady(Void) {
 	return 0;
 }
 
-HDIVolume* HDIBootVolume(void) { return &gMainBootVolume; }
+HDIVolume* HDIBootVolume(void) { return &kMainVolume; }
 
 Boolean HDISeekBootVolume(BootloaderHeader* pBootHdr) {
     if (pBootHdr == NULL) return False;
-    gMainBootVolume.bootVolume = BootloaderTag(pBootHdr, EKBOOT_STRUCT_TAG_BOOT_VOLUME_ID);
+    kMainVolume.bootVolume = BootloaderTag(pBootHdr, EKBOOT_STRUCT_TAG_BOOT_VOLUME_ID);
 
-    if (gMainBootVolume.bootVolume != NULL) {
-        gMainBootVolume.isGpt = (gMainBootVolume.bootVolume->flags == 1);
+    if (kMainVolume.bootVolume != NULL) {
+        kMainVolume.isGpt = (kMainVolume.bootVolume->flags == 1);
 
-        ConsoleLog( gMainBootVolume.isGpt ?  "This is a GPT partition.\n" :  "This a MBR partition.\n");
+        ConsoleLog( kMainVolume.isGpt ?  "This is a GPT partition.\n" :  "This a MBR partition.\n");
         return True;
     }
 
@@ -55,7 +55,7 @@ Boolean OpenHDI(BootloaderHeader* pBootHdr) {
 		if (!HDISeekBootVolume(pBootHdr)) 
 			return False;
 		
-		gHDIEnabled = True;
+		kEnabled = True;
 		return True;
     }
 
@@ -176,11 +176,13 @@ HDIContext* HDICreateContext(HDIChar* hdName, UInt16 iFlags, Boolean isPrivilege
 	drive->iFlags |= isPrivileged ? HDI_PRIVILEGED_DRIVE : 0x0;
 	drive->iFlags |= iFlags;
 
-	CopyMem("NoFS", drive->strDriveFs, 5);
+    // 7 = (null)'s size, performance...
+	CopyMem("(null)", drive->strDriveFs, 7);
 
 	return drive;
 }
 
-Boolean HDIEnabled(Void) {
-	return gHDIEnabled; 
+Boolean HDIEnabled(Void)
+{
+	return kEnabled;
 }

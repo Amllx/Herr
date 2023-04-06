@@ -2,16 +2,16 @@
 #include <IOLib/ACPI.h>
 #include <GraphicsLib/Terminal.h>
 
-RSDP* AcpiGetRsdp(BootloaderHeader* pBootHdr)
+RSDP* AcpiGetRsdp(BootloaderHeader* bootHdr)
 {
-	if (pBootHdr == NULL) return NULL;
-    struct TagRsdp* rsdp = BootloaderTag(pBootHdr, EKBOOT_STRUCT_TAG_RSDP_ID);
-    Check(rsdp != NULL, "RSDP is NULL!");
+	if (bootHdr == NULL) return NULL;
+    struct TagRsdp* rsdp = BootloaderTag(bootHdr, EKBOOT_STRUCT_TAG_RSDP_ID);
+    if (rsdp == NULL) return NULL;
 
     Result = ERR_SUCCESS;
     if (rsdp != NULL) return (RSDP*)rsdp->rsdp;
 	
-	Result = ERR_BAD_ACCESS; // Bad access here, means that the rsdp does not exist here.
+	Result = ERR_BAD_ACCESS;
     return NULL;
 }
 

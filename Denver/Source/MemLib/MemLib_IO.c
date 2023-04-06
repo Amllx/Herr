@@ -1,4 +1,4 @@
-#include <MemLib/CoreMMIO.h>
+#include <MemLib/IO.h>
 
 VoidPtr 
 MemAllocIO(UIntPtr off, MMIO_PAGE isPageProtected)

@@ -1,8 +1,8 @@
 #include <SATA/SATA.h>
 #include <AHCI/AHCI.h>
-#include <DTLib/Result.h>
 #include <IOLib/PCP.h>
 #include <AHCI/FisDma.h>
+#include <DTLib/Result.h>
 
 static PciDeviceHeader* gGlobalSataPci = NULL;
 static PciBarHeader* gSataBar = NULL;

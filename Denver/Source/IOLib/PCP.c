@@ -1,5 +1,5 @@
 #include <GraphicsLib/Terminal.h>
-#include <MemLib/CoreMMIO.h>
+#include <MemLib/IO.h>
 #include <IOLib/PCP.h>
 #include <IOLib/PCI.h>
 
@@ -63,8 +63,7 @@ static VoidPtr PcpGet(UInt8 Class, UInt8 SubClass, UInt8 ProgIf) {
 			}
         }
 	}
-	
-	ConsoleLog("%s %n", "MCFG entry was not found!");
+
 	return NULL;
 }
 

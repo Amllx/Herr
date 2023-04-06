@@ -1,6 +1,5 @@
-#include <Defs.h>
-#include <StringUtils.h>
 #include <MemLib/Alloc.h>
+#include <StringUtils.h>
 
 Int32 StringCompare(const Char* src, const Char* cmp, SizeT size) {
     Int32 counter = 0;
@@ -109,7 +108,7 @@ UInt16* AllocWideString(UInt16* text) {
     return alloc;
 }
 
-Int32 IsAha(Int32 character) {
+Int32 IsAlpha(Int32 character) {
 	return (((character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z')) ? 1 : 0);
 }
 
@@ -136,7 +135,7 @@ char* StringToLowerCase(Char* in) {
 
     if (in && out) {
         for (int index = 0; index < StringLength(in); ++index) {
-            if (IsAha(in[index])) {
+            if (IsAlpha(in[index])) {
                 Boolean found = False;
 
                 for (int ascii_index = 0; ascii_index < 27; ++ascii_index) {

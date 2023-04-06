@@ -1,4 +1,4 @@
-; This is Amlal El Mahrouss's Code
+; This is XPX's Code
 ; File: Dump.x86_64.S
 ; Purpose: Dumping utilities.
 

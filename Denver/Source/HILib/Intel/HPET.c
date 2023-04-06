@@ -1,6 +1,6 @@
 #include <GraphicsLib/Terminal.h>
 #include <HILib/Intel/HPET.h>
-#include <MemLib/CoreMMIO.h>
+#include <MemLib/IO.h>
 #include <DTLib/Assert.h>
 #include <DTLib/Result.h>
 

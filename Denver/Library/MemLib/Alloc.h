@@ -24,7 +24,7 @@
 #define MEM_OUT_OF_MEMORY (-7)
 #define MEM_BAD_ARG (-9)
 
-#define MEM_MAGIC (0x225533)
+#define MEM_MAGIC       (0x225533)
 #define MEM_MAX_HEADERS (128U)
 
 typedef struct BlkHdr {
@@ -40,11 +40,11 @@ typedef struct MemBlk {
     struct MemBlk* Next;
 } Attribute((packed)) MemBlk;
 
-Boolean MemEnabled(void);
-VoidPtr MemAlloc(SizeT size);
-Int32   MemFree(VoidPtr pointer);
-VoidPtr MemResize(VoidPtr pointer, SizeT sz);
 Boolean MemInit(BootloaderHeader* bootHeader);
+VoidPtr MemResize(VoidPtr pointer, SizeT sz);
+Int32   MemFree(VoidPtr pointer);
+VoidPtr MemAlloc(SizeT size);
+Boolean MemEnabled(void);
 VoidPtr MemStart(Void);
 VoidPtr MemEnd(Void);
 

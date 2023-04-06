@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MemLib/CorePaging.h>
+#include <MemLib/Page.h>
 #include <IOLib/ACPI.h>
 #include <Defs.h>
 

@@ -20,8 +20,8 @@ static struct bootloader_header_tag_framebuffer framebuffer_hdr_tag = {
                 .identifier = EKBOOT_HEADER_TAG_FRAMEBUFFER_ID,
                 .next = 0
         },
-        .framebuffer_width  = 800,
-        .framebuffer_height = 600,
+        .framebuffer_width  = 1280,
+        .framebuffer_height = 720,
         .framebuffer_bpp    = 32,
 };
 

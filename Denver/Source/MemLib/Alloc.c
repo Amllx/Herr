@@ -4,45 +4,48 @@
 #include <StringUtils.h>
 #include <DTLib/Result.h>
 
-static Boolean gAllocationEnabled = False;
-static SizeT gMemorySize = 0;
-static MemBlk* gBaseAddress = NULL;
-static MemBlk* gHighestAddress = NULL;
+static Boolean kAllocationEnabled = False;
+static MemBlk* kHighestAddress = NULL;
+static MemBlk* kBaseAddress = NULL;
+static SizeT kMemorySize = 0;
 
 Boolean MemEnabled(void)
 {
-	return gAllocationEnabled;
+	return kAllocationEnabled;
 }
 
 VoidPtr MemStart(Void)
 {
-	return gBaseAddress;
+	return kBaseAddress;
 }
 
 VoidPtr MemEnd(Void)
 {
-	return gHighestAddress;
+	return kHighestAddress;
 }
 
 Boolean MemInit(BootloaderHeader* bootHeader)
 {
-    Check(!gAllocationEnabled, "Mem API is already enabled!");
+    if (kAllocationEnabled)
+        return True;
+
 	struct TagMemmap* entries = BootloaderTag(bootHeader, EKBOOT_STRUCT_TAG_MEM_ID);
 
 	for (SizeT i = 0; i < entries->entries; i++)
 	{
 		if (entries->memmap[i].type == EKBOOT_MEM_USABLE)
 		{
-			if (IsNull(gBaseAddress))
+			if (IsNull(kBaseAddress))
 			{
-				gBaseAddress = (VoidPtr)(entries->memmap[i].base);
-				gBaseAddress->Next = NULL;
-				continue;
-			} else if (IsNull(gBaseAddress))
-			{
-				gHighestAddress = (VoidPtr)(entries->memmap[i].base);
+				kBaseAddress = (VoidPtr)(entries->memmap[i].base);
+				kBaseAddress->Next = NULL;
 
-				gHighestAddress->Next = NULL;
+				continue;
+			} else if (IsNull(kBaseAddress))
+			{
+				kHighestAddress = (VoidPtr)(entries->memmap[i].base);
+				kHighestAddress->Next = NULL;
+
 				continue;
 			}
 
@@ -50,24 +53,24 @@ Boolean MemInit(BootloaderHeader* bootHeader)
 		}
 	}
 
-	gMemorySize = ( -((UIntPtr)&gBaseAddress - (UIntPtr)&gHighestAddress)) * sizeof(struct MemBlk);
+	kMemorySize = ( -((UIntPtr)&kBaseAddress - (UIntPtr)&kHighestAddress)) * sizeof(struct MemBlk);
 
-	gHighestAddress->Prev = gBaseAddress;
-    gHighestAddress->Next = gBaseAddress;
+	kHighestAddress->Prev = kBaseAddress;
+    kHighestAddress->Next = kBaseAddress;
 
-	gBaseAddress->Prev = gHighestAddress;
+	kBaseAddress->Prev = kHighestAddress;
 
-    gAllocationEnabled = True;
+    kAllocationEnabled = True;
 
 	for (SizeT i = 0; i < MEM_MAX_HEADERS; ++i){
-		gBaseAddress->Index[i].Used = False;
-		gHighestAddress->Index[i].Used = False;
-		gBaseAddress->Index[i].Magic = MEM_MAGIC;
-		gHighestAddress->Index[i].Magic = MEM_MAGIC;
+		kBaseAddress->Index[i].Used = False;
+		kHighestAddress->Index[i].Used = False;
+		kBaseAddress->Index[i].Magic = MEM_MAGIC;
+		kHighestAddress->Index[i].Magic = MEM_MAGIC;
 	}
 
-	ConsoleLog("%s %x %n", "Memory Size: ", gMemorySize);
-	ConsoleLog("%s %x %s %x %n", "From: ", (UIntPtr)&gBaseAddress, " To: ", (UIntPtr)&gHighestAddress);
+	ConsoleLog("%s %x %n", "Memory Size: ", kMemorySize);
+	ConsoleLog("%s %x %s %x %n", "From: ", (UIntPtr)&kBaseAddress, " To: ", (UIntPtr)&kHighestAddress);
 
     return True;
 }
@@ -123,7 +126,7 @@ MemReserveBlock(MemBlk* block, SizeT index, SizeT Size) {
 
 	gAllocLock.Locked = True;
 
-	block->Index[index].VirtualAddress = (VoidPtr)(((UIntPtr)block + (UIntPtr)gBaseAddress) / PAGE_ENTRY_CNT);
+	block->Index[index].VirtualAddress = (VoidPtr)(((UIntPtr)block + (UIntPtr)kBaseAddress) / PAGE_ENTRY_CNT);
 	block->Index[index].Magic = MEM_MAGIC;
 	block->Index[index].Size += Size;
 	block->Index[index].Used = True;
@@ -140,7 +143,7 @@ MemReserveBlock(MemBlk* block, SizeT index, SizeT Size) {
 
 static VoidPtr MemAllocBlock(MemBlk* block, SizeT Size) {
     Result = MEM_NOT_ENABLED;
-    if (!gAllocationEnabled) return NULL;
+    if (!kAllocationEnabled) return NULL;
 
     Result = ERR_NULL;
     if (block == NULL) return NULL;
@@ -214,13 +217,13 @@ static Void MemExpandBlock(MemBlk* Current) {
 
 VoidPtr MemAlloc(SizeT Size) {
     Result = ERR_FAILURE;
-    if (!gAllocationEnabled) return NULL;
+    if (!kAllocationEnabled) return NULL;
 
 	Result = MEM_INVALID_SIZE;
     if (Size < 1) return NULL;
 
 	VoidPtr allocatedBlock = NULL;
-	MemBlk* currentBlock = gBaseAddress;
+	MemBlk* currentBlock = kBaseAddress;
 	MemInitAllocationList(currentBlock);
 
 	// seek and obtain strategy.
@@ -240,11 +243,11 @@ VoidPtr MemAlloc(SizeT Size) {
 VoidPtr MemResize(VoidPtr Pointer, SizeT iSize) {
 	Result = MEM_BAD_ARG;
 
-	if (!gAllocationEnabled) return NULL;
+	if (!kAllocationEnabled) return NULL;
 	if (Pointer == NULL) return NULL;
 	if (iSize == 0) return NULL;
 
-	MemBlk* currentBlock = gBaseAddress;
+	MemBlk* currentBlock = kBaseAddress;
 
 	while (currentBlock != NULL) {
 		for (SizeT index = 0; index < MEM_MAX_HEADERS; ++index) {
@@ -292,12 +295,12 @@ static Int32 MemFreeBlock(MemBlk* currentBlock, SizeT index, VoidPtr ptr) {
 
 Int32 MemFree(VoidPtr Alloc) {
     Result = ERR_FAILURE;
-    if (!gAllocationEnabled) return MEM_NOT_ENABLED;
+    if (!kAllocationEnabled) return MEM_NOT_ENABLED;
 	
 	Result = ERR_NULL;
 	if (Alloc == NULL) return MEM_BAD_ARG;
 
-    MemBlk* currentBlock = gBaseAddress;
+    MemBlk* currentBlock = kBaseAddress;
 
     while (currentBlock != NULL) {
         for (SizeT index = 0; index < MEM_MAX_HEADERS; ++index) {

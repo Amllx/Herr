@@ -3,7 +3,7 @@
 
 export BIN = DEPLOY/bin/ DEPLOY/LimineDeploy.elf DEPLOY/boot.iso disk/
 export CACHE_DIR = DEPLOY/bin/boot/cache
-export BOOT = DEPLOY/bin/efi/boot/
+export BOOT = DEPLOY/bin/efi/boot
 export QEMU = qemu-system-x86_64
 export QEMU_FLAGS = -machine q35 -smp cores=4 -m 4G -device pvpanic
 

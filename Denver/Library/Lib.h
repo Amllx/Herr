@@ -11,5 +11,5 @@
 #include <HILib/Intel/Cpu.h>
 #include <MemLib/Alloc.h>
 #include <Prekernel/EKBoot.h>
-#include <MemLib/CorePaging.h>
+#include <MemLib/Page.h>
 #include <DTLib/Assert.h>

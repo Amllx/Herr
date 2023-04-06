@@ -1,5 +1,5 @@
 #include <GraphicsLib/Terminal.h>
-#include <MemLib/CorePaging.h>
+#include <MemLib/Page.h>
 #include <MemLib/Alloc.h>
 
 Boolean VirtualIsRw(PageDirectoryEntry* pte)

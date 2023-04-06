@@ -1,8 +1,8 @@
 #pragma once
 
-typedef long int DTSTATUS;
+#include <OSErr.h>
 
-extern DTSTATUS Result;
+extern OSErr Result;
 
 #define BreakIf(ErrorId) if (ErrorId == Result) { ConsoleLog("Integrity check failed!, Aborting\n"); Asm("int $25"); }
 

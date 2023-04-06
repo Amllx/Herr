@@ -4,16 +4,16 @@
 
 extern void DisablePIC(void);
 
-static struct ProcessorEntry* g_LocalApic[256]; // number of APIC detected by the OS.
-static UInt8 g_NumCores = 0;  // number of cores detected
+static struct ProcessorEntry* kLocalApic[256]; // number of APIC detected by the OS.
+static UInt8 kNumCores = 0;  // number of cores detected
 
-const UInt8 SmpNumCores(Void) { return g_NumCores; }
+const UInt8 SmpNumCores(Void) { return kNumCores; }
 
 struct ProcessorEntry* SmpProcessorEntryGet(SizeT Index) {
     if (Index > 255)
         return NULL;
 
-    return g_LocalApic[Index];
+    return kLocalApic[Index];
 }
 
 #ifndef SMP_EXTENDED_BIT
@@ -44,39 +44,39 @@ Int32 SmpProbeApic(BootloaderHeader* bootHdr) {
 
             if(StringCompare((Char*)ptr, APIC_IDENT, 4) == 0) { // is this the APIC?
                 ConsoleLog("Found APIC controller....\n");
-                g_LocalApic[g_NumCores] = MemAlloc(sizeof(struct ProcessorEntry));
-                g_LocalApic[g_NumCores]->LocalApic = (UInt64)((ptr+0x24));
+                kLocalApic[kNumCores] = MemAlloc(sizeof(struct ProcessorEntry));
+                kLocalApic[kNumCores]->LocalApic = (UInt64)((ptr+0x24));
 
                 ptr2 = ptr + *((UInt32*)(ptr + 4));
                 for(ptr += 44; ptr < ptr2; ptr += ptr[1]) {
                     switch(ptr[0]) {
                     case 0: {
                         if(ptr[4] & 1)
-                            g_LocalApic[g_NumCores]->iApicType |= LOCAL_APIC_TYPE;
+                            kLocalApic[kNumCores]->iApicType |= LOCAL_APIC_TYPE;
 
                         break; // found Processor Local APIC
                     }
                     case 1: {
-                        g_LocalApic[g_NumCores]->IoApic = (UInt64)*((UInt32*)(ptr+4));
-                        g_LocalApic[g_NumCores]->iApicType |= IO_APIC_TYPE;
+                        kLocalApic[kNumCores]->IoApic = (UInt64)*((UInt32*)(ptr+4));
+                        kLocalApic[kNumCores]->iApicType |= IO_APIC_TYPE;
 
                         break; // io apic
                     }
                     case 5: {
-                        g_LocalApic[g_NumCores]->LocalApic = *((UInt64*)(ptr+4));
-                        g_LocalApic[g_NumCores]->iApicType |= TYPE_64BIT_APIC;
+                        kLocalApic[kNumCores]->LocalApic = *((UInt64*)(ptr+4));
+                        kLocalApic[kNumCores]->iApicType |= TYPE_64BIT_APIC;
 
                         break; // 64 bit APIC
                     }         // found 64 bit LAPIC
                     }
 
-                    ++g_NumCores;
+                    ++kNumCores;
                 }
                 break;
             }
         }
 
-        return g_NumCores;
+        return kNumCores;
     }
 
     return 0;
