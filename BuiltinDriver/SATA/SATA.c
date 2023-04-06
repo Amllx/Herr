@@ -214,7 +214,7 @@ Boolean AhciInitDriver(Void) {
 	get->response = callback;
 
 	gGlobalSataPci = PcpMakeRequest("GET", get);
-	gSataDetected = get->response->callbackSlot5 != PCP_FAIL;
+	gSataDetected = get->response->CallbackSlot5 != PCP_FAIL;
 
 	if (!gSataDetected) {
 		goto Fail;

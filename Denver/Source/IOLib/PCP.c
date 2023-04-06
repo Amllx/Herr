@@ -82,8 +82,8 @@ VoidPtr PcpMakeRequest(const Char* argCmd, VoidPtr structPtr) {
 								get->response->SubClass, 
 								get->response->ProgIf);
 
-		get->response->callbackSlot1 = (UIntPtr)result;
-		get->response->callbackSlot5 = (result == NULL) ? PCP_FAIL : PCP_OK; // 200 : OK
+		get->response->CallbackSlot1 = (UIntPtr)result;
+		get->response->CallbackSlot5 = (result == NULL) ? PCP_FAIL : PCP_OK; // 200 : OK
 
 		return result;
 	}

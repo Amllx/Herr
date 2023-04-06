@@ -1,8 +1,8 @@
-OUTPUT = $(KERNEL_ID).LIB
+OUTPUT = $(KERNEL_ID).lib
 LD_SCRIPT = Linkerscript.ld
 CROSS_LD = x86_64-elf-ld
 CROSS_CC = x86_64-elf-gcc	
-ROOTLIB = Kernel
+ROOTLIB = Denver
 LD_FLAGS = --script=$(LD_SCRIPT) -nostdlib -static 	-zmax-page-size=0x1000
 
 SOURCES = $(wildcard $(ROOTDIR)/Source/*.c) $(wildcard $(ROOTDIR)/Source/Prekernel/*.c) $(wildcard $(ROOTDIR)/Source/DT/*.c) $(wildcard $(ROOTDIR)/Source/GraphicsLib/*.c) $(wildcard $(ROOTDIR)/Source/ELFLib/*.c)\

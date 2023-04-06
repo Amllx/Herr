@@ -19,7 +19,7 @@ TryCreateDevice(DEVICE_ID i, Char* DeviceName, struct DeviceCreation* CreationSt
 }
 
 DEVICE_ID
-CreateDevice(Char* DeviceName, struct DeviceCreation* CreationStruct)
+DLCreateDevice(Char* DeviceName, struct DeviceCreation* CreationStruct)
 {
     if (StringLength(DeviceName) > 256) return NULLDEV;
     if (IsNull(CreationStruct)) return NULLDEV;
@@ -54,7 +54,7 @@ TryCloseDevice(DEVICE_ID Device)
 }
 
 Boolean 
-CloseDevice(DEVICE_ID Device, Int32 PID, Int32 User)
+DLCloseDevice(DEVICE_ID Device, Int32 PID, Int32 User)
 {
     for (SizeT dev = 0; dev < XPX_DEV_MAX; dev++)
     {
@@ -68,7 +68,7 @@ CloseDevice(DEVICE_ID Device, Int32 PID, Int32 User)
 }
 
 VoidPtr 
-GetDevicePointer(DEVICE_ID Device)
+DLGetDevicePointer(DEVICE_ID Device)
 {
     if (Device > XPX_DEV_MAX) return NULL;
     DevicePtr dev = &gDevices[Device];
@@ -78,7 +78,7 @@ GetDevicePointer(DEVICE_ID Device)
 }
 
 SizeT 
-GetDeviceSize(DEVICE_ID Device)
+DLGetDeviceSize(DEVICE_ID Device)
 {
     if (Device > XPX_DEV_MAX) return 0;
     DevicePtr dev = &gDevices[Device];
@@ -88,7 +88,7 @@ GetDeviceSize(DEVICE_ID Device)
 }
 
 Char* 
-GetDeviceName(DEVICE_ID Device)
+DLGetDeviceName(DEVICE_ID Device)
 {
     if (Device > XPX_DEV_MAX) return NULL;
     DevicePtr dev = &gDevices[Device];

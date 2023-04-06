@@ -35,8 +35,8 @@ typedef struct Device
 
 typedef Device* DevicePtr;
 
-DEVICE_ID CreateDevice(Char* DeviceName, struct DeviceCreation* CreationStruct);
-Boolean CloseDevice(DEVICE_ID Device, Int32 PID, Int32 User);
-VoidPtr GetDevicePointer(DEVICE_ID Device);
-SizeT GetDeviceSize(DEVICE_ID Device);
-Char* GetDeviceName(DEVICE_ID Device);
+DEVICE_ID DLCreateDevice(Char* DeviceName, struct DeviceCreation* CreationStruct);
+Boolean DLCloseDevice(DEVICE_ID Device, Int32 PID, Int32 User);
+VoidPtr DLGetDevicePointer(DEVICE_ID Device);
+SizeT DLGetDeviceSize(DEVICE_ID Device);
+Char* DLGetDeviceName(DEVICE_ID Device);

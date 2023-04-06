@@ -2,5 +2,5 @@
 
 rm -rf Deployment/bin/
 mkdir Deployment/bin/
-cp KERNEL.LIB Deployment/bin/
+cp Kernel.lib Deployment/bin/
 cp SystemRoot/limine.cfg Deployment/bin/

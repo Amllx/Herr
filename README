@@ -1,6 +1,6 @@
 Warrior OS
 ==========
 
-Kernel/ : Denver Microkernel.
+Denver/ : Denver Microkernel.
 Toolbox/ : Libraries and Programs.
 SystemRoot/ : System files.

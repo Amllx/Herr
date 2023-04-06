@@ -48,7 +48,7 @@ Thumbs.db
 *.mov
 *.wmv
 
-BUILDME/
+BUILDER/
 Disk/
 
 *.cache
@@ -92,7 +92,7 @@ Disk/
 
 *.d
 
-BUILDME
+BUILDER
 Toolchain
 Build-gcc
 Build-binutils

@@ -15,7 +15,7 @@
 #include <HDILib/HDI.h>
 #include <Lib.h>
 
-typedef struct SuperBlock
+typedef struct FFSSuperBlock
 {
     char PartName[32];
     Int32 PartType;
@@ -23,6 +23,17 @@ typedef struct SuperBlock
     HDILba EndLba;
     Int32 Crc32;
     Int32 PartFlags;
-} SuperBlock;
+} FFSSuperBlock;
 
-typedef SuperBlock *SuperBlockPtr;
+typedef FFSSuperBlock *FFSSuperBlockPtr;
+
+typedef struct FFSBlock
+{
+    char FileName[256];
+
+    Int32 FileType;
+    HDILba FileOff;
+    SizeT FileSz; // 5, 4... (in sector count)
+} FFSBlock;
+
+typedef FFSBlock *FFSBlockPtr;

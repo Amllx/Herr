@@ -29,7 +29,7 @@ Boolean DoSSEAndX87Tests(void) {
 
 struct BootStruct* gBootHdr = NULL;
 
-void Main(BootloaderHeader* pBootHdr) {
+void LibMain(BootloaderHeader* pBootHdr) {
 	gBootHdr = pBootHdr;
 
 	Console(gBootHdr);

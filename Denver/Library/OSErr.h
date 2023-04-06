@@ -8,3 +8,5 @@ static inline void Throw(Void) { Asm ("int $22"); }
 #ifndef __cplusplus
 #define kthrow Throw()
 #endif
+
+typedef Int32 OSErr;

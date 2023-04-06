@@ -3,7 +3,7 @@
         {
             "name": "Freestanding",
             "includePath": [
-                "${workspaceFolder}/Kernel/Library/*",
+                "${workspaceFolder}/Denver/Library/*",
                 "${workspaceFolder}/BuiltinDriver/*"
             ],
             "defines": [],

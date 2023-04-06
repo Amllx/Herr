@@ -4,13 +4,6 @@
 #include <CRC32.h>
 #include <IOLib/ACPI.h>
 
-/*
- * File: PCP.h
- * Purpose: PCI Control Protocol
- * 
- * Copyright Amlal El Mahrouss, all rights reserved.
- */
-
 #ifndef PCP_FAIL
 #define PCP_FAIL (0xDEEDBEEF)
 #endif
@@ -31,16 +24,16 @@ typedef struct PciResponse {
 	UInt16 DeviceId;
 	UInt16 VendorId;
 	
-	UInt64 callbackSlot1;
-	UInt64 callbackSlot2;
-	UInt64 callbackSlot3;
-	UInt64 callbackSlot4;
-	UInt64 callbackSlot5;
-	UInt64 callbackSlot6;
-	UInt64 callbackSlot7;
-	UInt64 callbackSlot8;
-	UInt64 callbackSlot9;
-	UInt64 callbackSlot10;
+	UInt64 CallbackSlot1;
+	UInt64 CallbackSlot2;
+	UInt64 CallbackSlot3;
+	UInt64 CallbackSlot4;
+	UInt64 CallbackSlot5;
+	UInt64 CallbackSlot6;
+	UInt64 CallbackSlot7;
+	UInt64 CallbackSlot8;
+	UInt64 CallbackSlot9;
+	UInt64 CallbackSlot10;
 } Attribute((packed)) PciResponse;
 
 VoidPtr PcpMakeRequest(const Char* strArgs, VoidPtr AdditionalStruct);
