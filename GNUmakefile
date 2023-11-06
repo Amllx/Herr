@@ -1,7 +1,7 @@
 # QEMU Makefile.
 # Written by Amlal El Mahrouss.
 
-export BIN = DEPLOY/bin/ DEPLOY/LimineDeploy.elf DEPLOY/boot.iso disk/
+export BIN = Deployment/bin/ Deployment/LimineDeploy.elf Deployment/boot.iso disk/
 export CACHE_DIR = DEPLOY/bin/boot/cache
 export BOOT = DEPLOY/bin/efi/boot/
 export QEMU = qemu-system-x86_64
@@ -17,11 +17,11 @@ $(CACHE_DIR)/OVMF.fd:
 
 .PHONY: run-debug
 run-debug: $(BOOT)/BOOTX64.EFI $(CACHE_DIR)/OVMF.fd
-	$(QEMU) $(QEMU_FLAGS) -hda disk.img -cdrom DEPLOY/boot.iso -bios $(CACHE_DIR)/OVMF.fd -d int
+	$(QEMU) $(QEMU_FLAGS) -hda disk.img -cdrom Deployment/boot.iso -bios $(CACHE_DIR)/OVMF.fd -d int
 
 .PHONY: run
 run: $(BOOT)/BOOTX64.EFI $(CACHE_DIR)/OVMF.fd
-	$(QEMU) $(QEMU_FLAGS) -hda disk.img -cdrom DEPLOY/boot.iso -bios $(CACHE_DIR)/OVMF.fd
+	$(QEMU) $(QEMU_FLAGS) -hda disk.img -cdrom Deployment/boot.iso -bios $(CACHE_DIR)/OVMF.fd
 
 .PHONY: disk
 disk:
